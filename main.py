@@ -1,6 +1,7 @@
 from config_setup import *
 from datetime import datetime
 import time
+from volume_control import *
 
 data = read_data("config.cfg")
 
@@ -36,16 +37,16 @@ def czas():
 	czas2 = godzina3+minuta3
 	return czas2
 
-
-
 while True:
 	time.sleep(5)
 	czas3 = czas()
-	#1
-	if czas3 > 0 and czas3 < lista3[0]:
-		set_vol_0()
-
-	
+	for i in range(len(lista3)-1):
+		if i%2 == 0:
+			if ((czas3 >= lista3[i]) and (czas3 < lista3[i+1])):
+				set_vol_0()
+		else:
+			if ((czas3 >= lista3[i]) and (czas3 < lista3[i+1])):
+				set_vol_100()
 
 
 
